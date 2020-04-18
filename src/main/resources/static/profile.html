@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<p>User: <span th:text="${account.getLogin()}"></span> </p>
+<p>Tasks:</p>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task: ${tasks}">
+        <td th:text="${task.getId()}"></td>
+        <td th:text="${task.getTitle()}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
