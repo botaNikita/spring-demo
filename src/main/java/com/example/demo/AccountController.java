@@ -22,7 +22,7 @@ public class AccountController {
     @GetMapping("user/{id}/profile")
     public String userProfile(@PathVariable int id, Model model) {
         Account account = accountRepository.findById(id).get();
-        List<Task> foundTasks = new LinkedList<>(); //taskRepository.findAllById({5});
+        List<Task> foundTasks = taskRepository.findByAccount(account);
 
         model.addAttribute("account", account);
         model.addAttribute("tasks", foundTasks);
@@ -32,9 +32,12 @@ public class AccountController {
 
     @GetMapping("/users/all")
     public String listAccounts(Model model) {
-        ArrayList<Account> allAccount = new ArrayList<>();
-        accountRepository.findAll().forEach(allAccount::add);
-        model.addAttribute("accounts", allAccount);
+        ArrayList<Account> allAccounts = new ArrayList<>();
+        accountRepository.findAll().forEach(allAccounts::add);
+//        accountRepository.findAll().forEach(a -> {
+//            allAccounts.add(a);
+//        });
+        model.addAttribute("accounts", allAccounts);
         return "accounts";
     }
 
@@ -45,13 +48,13 @@ public class AccountController {
             accountRepository.save(account);
 
             for (int j = 0; j < 10; ++j) {
-                Task task = new Task("task-" + j);
+                Task task = new Task("task-" + j, account);
                 taskRepository.save(task);
             }
         }
 
-        Account account = accountRepository.findById(5).get();
-        List<Task> foundTasks = new LinkedList<>(); //taskRepository.findAllById({5});
+        Account account = accountRepository.findAll().iterator().next();
+        List<Task> foundTasks = taskRepository.findByAccount(account);
 
         model.addAttribute("account", account);
         model.addAttribute("tasks", foundTasks);

@@ -33,6 +33,11 @@ public class Task {
     public Task() {
     }
 
+    public Task(String title, Account account) {
+        this.title = title;
+        this.account = account;
+    }
+
     public Task(String title) {
         setTitle(title);
     }

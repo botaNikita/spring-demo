@@ -6,7 +6,7 @@
 </head>
 <body>
 <p th:each="account: ${accounts}">
-    <a th:text="${account.getLogin()}" th:href="'/user/' + ${account.getIf()} + '/'" ></a>
+    <a th:text="${account.getLogin()}" th:href="'/user/' + ${account.getId()} + '/profile'" ></a>
 </p>
 </body>
 </html>
